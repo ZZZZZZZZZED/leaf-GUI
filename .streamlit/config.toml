@@ -1,0 +1,12 @@
+[global]
+disableWatchdogWarning = true
+
+showWarningOnDirectExecution = false
+
+[server]
+
+
+
+[logger]
+
+
