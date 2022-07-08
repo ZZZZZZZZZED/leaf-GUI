@@ -47,6 +47,10 @@ columns=''
 empty_list.append(zero)
 df = pd.DataFrame(empty_list,index=[zero],columns=[columns])
 
+if 'loading' not in st.session_state:  
+     st.session_state['loading'] = False
+if 'current loading' not in st.session_state:  
+     st.session_state['current loading'] = False
 
 if st.button('test'):
      UIsupport.testing()
@@ -56,21 +60,21 @@ if st.button('test'):
 
 
 
-st.write(st.session_state)
+# st.write(st.session_state)
 
 
 #start to initialize the chart
 if st.button('Run simulator'):
      if 'inf_chart' not in st.session_state:
-          st.session_state['inf_chart'] = infrastructure.line_chart(data=df,width=500)
-     # else:
-     #      st.session_state.inf_chart
+          st.session_state['inf_chart'] = infrastructure.line_chart(data=df,width=500,height=800)
+     
+
      
      UIsupport.read_logs_update_chart_test()
-
-     st.write(st.session_state)
-     # UIsupport.storeStrintoPy(str=Input,filename="run.py")
-     # os.system("python run.py")
+     st.session_state['loading'] = False
+     # st.write(st.session_state)
+     UIsupport.storeStrintoPy(str=Input,filename="run.py")
+     os.system("python run.py")
      
 
      
