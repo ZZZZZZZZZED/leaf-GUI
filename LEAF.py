@@ -26,77 +26,51 @@ st.set_page_config(
      }
 )
 
+#title
+st.title('LEAF')
 
-
-
-
-st.title('LEAF') #homepage maintitle
+#input box title
 st.markdown("###  Python Input")
 
+#input box
 Input = st_ace(language = 'python', theme='xcode',key="code input",auto_update=True,max_lines=20,font_size=22)
 
-
-
+#chart layout spaceholder
 infrastructure, application = st.columns(2)
 infrastructure.empty()
 application.empty()
 
+#initialize empty charts
+empty_list = []
+zero = 0.0
+columns=''
+empty_list.append(zero)
+df = pd.DataFrame(empty_list,index=[zero],columns=[columns])
 
 
-# app_chart = application.line_chart(np.random.randn(20, 1),width=500)
-temp_list = []
-num = 0
+if st.button('test'):
+     UIsupport.testing()
 
-temp_list.append(num)
-
-
-
-df2 = pd.DataFrame([1],index=[1],columns=['test'])
-
-ss = st.session_state
-if 'j' not in st.session_state:
-     st.session_state['j'] = 0
-if 'temp_list' not in st.session_state:
-     st.session_state['temp_list'] = temp_list
-
-st.dataframe(df2)
-
-
-df3 = pd.DataFrame(temp_list[0]-1,index=[0],columns=['columns'])
-df4 = pd.DataFrame(temp_list[0]-20,index=[5],columns=['columns'])
-st.dataframe(df3)
-
-st.write(st.session_state)
-
-# if st.button('test add'):
-#      infrastructure, application = st.columns(2)
-#      st.session_state['temp_list'][0] -= 1
-#      df3 = pd.DataFrame(st.session_state.temp_list[0],index=[st.session_state.j],columns=['columns'])
-#      st.session_state['inf_chart'].add_rows(df3)
-     
-#      # UIsupport.draw_infrastructure(temp_list,i=[st.session_state.j],columns=['test'])
-#      st.session_state['j']+=1
-#      # st.session_state['inf_chart'].add_rows(df2)
 
 
 
 
 
-df = pd.DataFrame(temp_list,index=[0],columns=[''])
-st.dataframe(df)
+st.write(st.session_state)
 
+
+#start to initialize the chart
 if st.button('Run simulator'):
      if 'inf_chart' not in st.session_state:
           st.session_state['inf_chart'] = infrastructure.line_chart(data=df,width=500)
-     st.session_state['inf_chart'].add_rows(df2)
-     st.session_state['inf_chart'].add_rows(df3)
-     st.session_state['inf_chart'].add_rows(df4)
-     for i in range(10):
-          time.sleep(0.5)
-          st.session_state['inf_chart'].add_rows(df4)
+     # else:
+     #      st.session_state.inf_chart
+     
+     UIsupport.read_logs_update_chart_test()
+
      st.write(st.session_state)
-     UIsupport.storeStrintoPy(str=Input,filename="run.py")
-     os.system("python run.py")
+     # UIsupport.storeStrintoPy(str=Input,filename="run.py")
+     # os.system("python run.py")
      
 
      

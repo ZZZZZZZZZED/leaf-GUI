@@ -1,0 +1,13 @@
+0: PowerMeter1: PowerMeasurement(dynamic=0.00W, static=10.00W)
+1: PowerMeter1: PowerMeasurement(dynamic=0.00W, static=10.00W)
+2: PowerMeter1: PowerMeasurement(dynamic=0.00W, static=10.00W)
+task has been added at 3
+3: PowerMeter1: PowerMeasurement(dynamic=20.00W, static=10.00W)
+4: PowerMeter1: PowerMeasurement(dynamic=20.00W, static=10.00W)
+5: PowerMeter1: PowerMeasurement(dynamic=20.00W, static=10.00W)
+6: PowerMeter1: PowerMeasurement(dynamic=20.00W, static=10.00W)
+7: PowerMeter1: PowerMeasurement(dynamic=20.00W, static=10.00W)
+task has been removed at 8
+8: PowerMeter1: PowerMeasurement(dynamic=0.00W, static=10.00W)
+9: PowerMeter1: PowerMeasurement(dynamic=0.00W, static=10.00W)
+Total power usage: 200.0 Ws
