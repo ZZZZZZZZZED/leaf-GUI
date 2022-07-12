@@ -9,11 +9,14 @@ from leaf.infrastructure import Node
 from leaf.power import PowerModelNode, PowerMeasurement, PowerMeter
 
 
+
 logger = logging.getLogger(__name__)
+
 logging.basicConfig(filename = 'logfile.log',
                     filemode = "w",
                     level=logging.DEBUG, 
                     format='%(message)s')
+
 
 
 def main():
@@ -34,7 +37,6 @@ def main():
         INFO	Total power usage: 200.0 Ws
     """
     # Initializing infrastructure and workload
-    print('1234')
     node = Node("node1", cu=100, power_model=PowerModelNode(max_power=30, static_power=10))
     task = Task(cu=100)
 
@@ -44,7 +46,7 @@ def main():
     env.process(placement(env, node, task))  # registering workload placement process
     env.process(power_meter.run(env))  # registering power metering process
 
-    env.run(until=12)  # run simulation for 10 seconds
+    env.run(until=10)  # run simulation for 10 seconds
 
     
     logger.info(f"Total power usage: {float(PowerMeasurement.sum(power_meter.measurements))} Ws")

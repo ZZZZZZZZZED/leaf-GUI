@@ -5,3 +5,6 @@ __pycache__/UIsupport.cpython-38.pyc
 logfile.log
 *.log
 logfile.log
+.vs/leaf_GUI/v17/.suo
+*.sqlite
+*.pyc

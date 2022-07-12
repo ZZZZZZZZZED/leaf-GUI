@@ -1,7 +1,7 @@
 [global]
 disableWatchdogWarning = true
 
-showWarningOnDirectExecution = false
+showWarningOnDirectExecution = true
 
 [server]
 
@@ -10,3 +10,8 @@ showWarningOnDirectExecution = false
 [logger]
 
 
+
+messageFormat = "%(message)s"
+
+[runner]
+fastReruns = true

@@ -1,7 +1,6 @@
 import logging
 import random
 import simpy
-import UIsupport
 import os
 from leaf.application import Application, SourceTask, ProcessingTask, SinkTask
 from leaf.infrastructure import Node, Link, Infrastructure
@@ -10,11 +9,11 @@ from leaf.power import PowerModelNode, PowerModelLink, PowerMeter, PowerMeasurem
 
 RANDOM_SEED = 1
 
-# logger = logging.getLogger(__name__)
-# logging.basicConfig(filename = "logfile.log",
-#                     filemode = "w",
-#                     level=logging.DEBUG, 
-#                     format='%(message)s')
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename = "logfile.log",
+                    filemode = "w",
+                    level=logging.DEBUG, 
+                    format='%(message)s')
 
 
 def main():
@@ -58,7 +57,6 @@ def main():
     env.process(application_pm.run(env, delay=0.5))
     env.process(cloud_and_fog_pm.run(env))
     env.process(infrastructure_pm.run(env))
-    env.process(UIsupport.reading(env))
     env.run(until=5)
 
     # logger.info(f"Application power usage: {float(PowerMeasurement.sum(application_pm.measurements))} Ws")
