@@ -8,3 +8,8 @@ logfile.log
 .vs/leaf_GUI/v17/.suo
 *.sqlite
 *.pyc
+__pycache__
+*.csv
+logfile.log
+logfile.log
+*.log
