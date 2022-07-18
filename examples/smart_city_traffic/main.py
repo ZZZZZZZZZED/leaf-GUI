@@ -1,8 +1,11 @@
-import logging
-import sys
-sys.path.append("..") 
-from os import makedirs
 
+import sys
+
+sys.path.append("../..") 
+
+import csv_handler as ch
+from os import makedirs
+import logging
 import simpy
 from tqdm import tqdm
 
@@ -15,11 +18,7 @@ from settings import SIMULATION_TIME, FOG_DCS, POWER_MEASUREMENT_INTERVAL, \
 from leaf.infrastructure import Infrastructure
 from leaf.power import PowerMeter
 
-# logger = logging.getLogger(__name__)
-# logging.basicConfig(filename = 'logfile.log',
-#                     filemode = "w",
-#                     level=logging.DEBUG, 
-#                     format='%(message)s')
+
 
 
 def main(count_taxis: bool, measure_infrastructure: bool, measure_applications: bool):
@@ -54,34 +53,21 @@ def main(count_taxis: bool, measure_infrastructure: bool, measure_applications: 
         env.process(pm_cctv.run(env))
 
     # ------------------ Run experiment -------------------
-    for until in tqdm(range(1, SIMULATION_TIME)):
-        env.run(until=until)
+    env.run(until=360)
 
     # ------------------ Write results --------------------
-    # result_dir = f"results/fog_{FOG_DCS}"
-    # if FOG_IDLE_SHUTDOWN:
-    #     result_dir += "_shutdown"
-    # makedirs(result_dir, exist_ok=True)
-    # if count_taxis:
-    #     csv_content = "time,taxis\n"
-    #     for i, taxis in enumerate(taxi_counter.measurements):
-    #         csv_content += f"{i},{taxis}\n"
-    #     with open(f"{result_dir}/taxis.csv", 'w') as csvfile:
-    #         csvfile.write(csv_content)
-    # if measure_infrastructure:
-    #     csv_content = "time,cloud static,cloud dynamic,fog static,fog dynamic,wifi static,wifi dynamic,wanUp static," \
-    #                   "wanUp dynamic,wanDown static,wanDown dynamic\n"
-    #     for i, (cloud, fog, wifi, wan_up, wan_down) in enumerate(zip(pm_cloud.measurements, pm_fog.measurements, pm_wifi.measurements, pm_wan_up.measurements, pm_wan_down.measurements)):
-    #         csv_content += f"{i},{cloud.static},{cloud.dynamic},{fog.static},{fog.dynamic},{wifi.static},{wifi.dynamic},{wan_up.static},{wan_up.dynamic},{wan_down.static},{wan_down.dynamic}\n"
-    #     with open(f"{result_dir}/infrastructure.csv", 'w') as csvfile:
-    #         csvfile.write(csv_content)
-    # if measure_applications:
-    #     csv_content = "time,v2i static,v2i dynamic,cctv static,cctv dynamic\n"
-    #     for i, (v2i, cctv) in enumerate(zip(pm_v2i.measurements, pm_cctv.measurements)):
-    #         csv_content += f"{i},{v2i.static},{v2i.dynamic},{cctv.static},{cctv.dynamic}\n"
-    #     with open(f"{result_dir}/applications.csv", 'w') as csvfile:
-    #         csvfile.write(csv_content)
+    
 
+    ch.output_csv(PM=pm_cloud, rename='Cloud',type = 1)
+    ch.output_csv(PM=pm_fog, rename='Fog',type = 1)
+    ch.output_csv(PM=pm_wan_up, rename='Wan up',type = 1)
+    ch.output_csv(PM=pm_wan_down, rename='Wan down',type = 1)
+    ch.output_csv(PM=pm_wifi, rename='WIFI',type = 1)
+
+    ch.output_csv(PM=pm_v2i, rename='V2I',type = 2)
+    ch.output_csv(PM=pm_cctv, rename='CCTV',type = 2)
+
+    ch.merge_results()
 
 class TaxiCounter:
     def __init__(self, env: simpy.Environment, infrastructure: Infrastructure):

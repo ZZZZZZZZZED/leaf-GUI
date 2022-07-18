@@ -2,6 +2,8 @@ import logging
 import random
 import simpy
 import os
+import csv_handler as ch
+from itertools import zip_longest
 from leaf.application import Application, SourceTask, ProcessingTask, SinkTask
 from leaf.infrastructure import Node, Link, Infrastructure
 from leaf.orchestrator import Orchestrator
@@ -41,6 +43,7 @@ def main():
         DEBUG	4: cloud_and_fog_meter: PowerMeasurement(dynamic=2.38W, static=30.00W)
         DEBUG	4.5: application_meter: PowerMeasurement(dynamic=2.54W, static=30.20W)
     """
+    
     infrastructure = create_infrastructure()
     application = create_application(source_node=infrastructure.node("sensor"), sink_node=infrastructure.node("cloud"))
     orchestrator = SimpleOrchestrator(infrastructure)
@@ -54,20 +57,20 @@ def main():
     env.process(application_pm.run(env, delay=0.5))
     env.process(cloud_and_fog_pm.run(env))
     env.process(infrastructure_pm.run(env))
-    env.run(until=10)
+    env.run(until=20)
+ 
+    # ch.clean_cache(ch.CACHE)
+    ch.output_csv(PM=application_pm, rename='APP',type = 2,  delay=0.5)
+    ch.output_csv(PM=cloud_and_fog_pm, rename='Cloud_and_Fog',type = 1)
+    ch.output_csv(PM=infrastructure_pm, rename='INF',type = 1)
 
-    print('123')
-    result_dir = f"results/"
-    csv_content = "time,application_pm,cloud_and_fog_pm,infrastructure_pm\n"
-    os.makedirs(result_dir, exist_ok=True)
-    for i, (application_pm,cloud_and_fog_pm,infrastructure_pm) in enumerate(zip(application_pm.measurements, cloud_and_fog_pm.measurements, infrastructure_pm.measurements)):
-        print(application_pm,cloud_and_fog_pm,infrastructure_pm)
-        csv_content += f"{i},{application_pm.static+application_pm.dynamic},{cloud_and_fog_pm.static+cloud_and_fog_pm.dynamic},{infrastructure_pm.static+infrastructure_pm.dynamic}\n"
-    with open(f"{result_dir}/applications.csv", 'w') as csvfile:
-        csvfile.write(csv_content)
+    ch.merge_results()
 
-    # logger.info(f"Application power usage: {float(PowerMeasurement.sum(application_pm.measurements))} Ws")
-    # logger.info(f"Infrastructure power usage: {float(PowerMeasurement.sum(infrastructure_pm.measurements))} Ws")
+
+
+    logger.info(f"Application power usage: {float(PowerMeasurement.sum(application_pm.measurements))} Ws")
+    logger.info(f"Infrastructure power usage: {float(PowerMeasurement.sum(infrastructure_pm.measurements))} Ws")
+
 
 
 def create_infrastructure():

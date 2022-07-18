@@ -3,19 +3,14 @@ import simpy
 import re
 import sys
 import os
-
+import csv_handler as ch
 from leaf.application import Task
 from leaf.infrastructure import Node
 from leaf.power import PowerModelNode, PowerMeasurement, PowerMeter
 
 
-
 logger = logging.getLogger(__name__)
-
-logging.basicConfig(filename = 'logfile.log',
-                    filemode = "w",
-                    level=logging.DEBUG, 
-                    format='%(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(levelname)s\t%(message)s')
 
 
 
@@ -48,17 +43,28 @@ def main():
 
     env.run(until=10)  # run simulation for 10 seconds
 
+    ch.clean_cache(ch.CACHE)
+
+    ch.output_csv(PM=power_meter, rename='INF',type = 1)
+
+    ch.merge_results()
+
+
+
+
+
     
-    logger.info(f"Total power usage: {float(PowerMeasurement.sum(power_meter.measurements))} Ws")
+    
+
 
 def placement(env, node, task):
     """Places the task after 3 seconds and removes it after 8 seconds."""
     yield env.timeout(3)
     task.allocate(node)
-    logger.info(f'task has been added at {env.now}')
+
     yield env.timeout(5)
     task.deallocate()
-    logger.info(f'task has been removed at {env.now}')
+
 
 
 
