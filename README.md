@@ -37,7 +37,7 @@ with open(f"{result_dir}/infrastructure.csv", 'w') as csvfile:
             csvfile.write(csv_content)
 ```
 
-The above code block shows the efforts made in the [original script](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/examples/smart_city_traffic/main.py#L66-L72) to visualize some power meters; however, this code is not reusable and complex. Moreover, even with continued use of this method, some leaf simulator characteristics such as [sampling frequency](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/leaf/power.py#L182) and [delay](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/leaf/power.py#L200-L207) are difficult to solve while using above method.
+The above code block shows the efforts made in the [original script](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/examples/smart_city_traffic/main.py#L66-L72) to visualize some power meters; however, this code is not reusable and complex. Moreover, even with continued use of this method, some LEAF simulator characteristics such as [sampling frequency](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/leaf/power.py#L182) and [delay](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/leaf/power.py#L200-L207) are difficult to solve while using above method.
 
 So, a more convinent method would be:
 
@@ -66,4 +66,4 @@ For better conducting the living chart, it is best not to simulate more than 360
 
 ## ❓ More information
 
-To find out what is LEAF, what is used for, please click [LEAF](https://leaf.readthedocs.io/en/latest/index.html).
+To find out what is LEAF, what is LEAF used for, please click [LEAF](https://leaf.readthedocs.io/en/latest/index.html).
