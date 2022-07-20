@@ -4,6 +4,14 @@ This project is based on practising the introductory examples in the [original L
 
 Some new methods were introduced in the leaf-GUI for agile and compatibility usage; as a result, users will no longer need to write [complex loops for writing to csv](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/examples/smart_city_traffic/main.py#L56-L78), and [modify how each data](https://github.com/dos-group/leaf/tree/main/examples/smart_city_traffic/analysis) would be displayed in the final chart.
 
+## ⚙️ Get start!
+
+Set up your environment and run:
+```python
+streamlit run LEAF.py
+```
+
+
 ## 🚀 How does it work?
 
 For LEAF starters, you can just input [examples](https://github.com/ZZZZZZZZZED/leaf-GUI/tree/main/examples) in the python interpreter on the home page. Then, click 'run simulator' and check the results.
