@@ -11,7 +11,7 @@ For LEAF starters, you can just input [examples](https://github.com/ZZZZZZZZZED/
 ### If you are running your unique script:
 Please do not forget to add this line for you to easily draw and classify lines in the graph for each [power meter](https://leaf.readthedocs.io/en/latest/reference/power.html).
 
-```
+```python
 import csv_handler as ch
 ```
 
