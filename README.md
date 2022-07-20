@@ -64,3 +64,6 @@ Because of the existing defects of streamlit, if there is a cell with the value 
 
 For better conducting the living chart, it is best not to simulate more than 3600 seconds, which is a simulated hour, because a large amount of data flow may cause the page to get stuck, but after waiting for a period of calculation time, the final result will be displayed correctly. Suppose you must simulate the power consumption in an extensive time background, such as 3600*24, to find out the difference between day and night. In that case, you can get the CSV file through LEAF and import the CSV file on the home page by the ‘import results’ button, and the development will be displayed correctly.
 
+## ❓ More information
+
+To find out what is LEAF, what is used for, please click [LEAF](https://leaf.readthedocs.io/en/latest/index.html).
