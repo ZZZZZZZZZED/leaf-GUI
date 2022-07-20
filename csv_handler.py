@@ -19,7 +19,6 @@ def clean_cache(path):
 
 def check_exists(inf,app):
     filelist = os.listdir(CACHE)
-    print(filelist)
     if inf and app in filelist:
         return 2
     elif inf in filelist:
