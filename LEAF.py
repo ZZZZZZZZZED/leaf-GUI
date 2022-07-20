@@ -88,12 +88,8 @@ else:
 
 #start to initialize the chart
 if st.button('Run simulator'):
-
      st.session_state['loading'] = False
-
-     
      ch.clean_cache(ch.CACHE)
-     
      ui.storeStrintoPy(string=Input,filename=ch.FILE)
      ui.loading(ui.LOADING_GIF)
      if ch.check_exists(ch.INFRASTRUCTURE,ch.APPLICATION) == 2:
@@ -133,16 +129,7 @@ if st.button('Run simulator'):
 
      #TODO
      #st.progress
-     #st.success
 
-     
-
-     
-
-
-     # after script running, draw graph
-     
-     # UIsupport.read_logs_update_chart_test()
 
  
      
@@ -154,7 +141,8 @@ if st.button('Run simulator'):
 
 st.markdown('''
      <style>
-     #infrastructure > div > span{ color: green;} 
+     #leaf > div > span{ color: green;} 
      #application > div > span{color: green;} 
+
      #root > div > div.MuiGrid-root.MuiGrid-container.MuiGrid-justify-content-xs-flex-end > button > span{MuiButton-label:"test"}
      </style>''', unsafe_allow_html=True)

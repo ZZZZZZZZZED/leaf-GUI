@@ -8,7 +8,7 @@ CACHE = "./results_cache/"
 INFRASTRUCTURE = 'infrastructure.csv'
 APPLICATION = 'application.csv'
 FILE = 'run.py'
-
+STATIC = "./static/"
 
 def clean_cache(path):
     if not os.path.exists(path):
@@ -21,15 +21,10 @@ def check_exists(inf,app):
     filelist = os.listdir(CACHE)
     print(filelist)
     if inf and app in filelist:
-        print('2')
         return 2
     elif inf in filelist:
-        print('1')
-        print(inf)
-        print(app)
         return 1
     else:
-        print('False')
         return False
 
 def read_first_line(csv):
@@ -47,8 +42,8 @@ def read_row_by_sequence(csv,nrows):
 def merge_results():
     path = CACHE
     files = os.listdir(path)
-    temp_inf = pd.read_csv('temp.csv',index_col=0)
-    temp_app = pd.read_csv('temp.csv',index_col=0)
+    temp_inf = pd.read_csv(STATIC+'temp.csv',index_col=0)
+    temp_app = pd.read_csv(STATIC+'temp.csv',index_col=0)
     for f in files:
         if '1_' in f and f.endswith('.csv'):
             df = pd.read_csv(path + f, index_col=0) 
