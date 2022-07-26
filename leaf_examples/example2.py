@@ -56,7 +56,7 @@ def main():
     env.process(application_pm.run(env, delay=0.5))
     env.process(cloud_and_fog_pm.run(env))
     env.process(infrastructure_pm.run(env))
-    env.run(until=20)
+    env.run(until=10)
  
     ch.clean_cache(ch.CACHE)
     ch.output_csv(PM=application_pm, rename='APP',type = 2,  delay=0.5)

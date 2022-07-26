@@ -5,9 +5,18 @@ import time
 import pandas as pd
 import streamlit as st
 import base64
+
  
 
 LOADING_GIF = 'static/loading.gif'
+LOGO = 'static/logo.png'
+
+
+
+
+def uploader_callback():
+    print('Uploaded file')
+
 
 def loading(path):
     if st.session_state.loading == False:
@@ -21,7 +30,6 @@ def loading(path):
         st.session_state['loading'] = False
         st.session_state['loadinggif'].empty()
         
-
 def storeStrintoPy(string,filename):
     copy_to_py = open(filename, 'w')
     copy_to_py.write(string)
@@ -29,6 +37,10 @@ def storeStrintoPy(string,filename):
     os.system('python %s'%filename)
 
 
-
-
-    
+def run_example(filename):
+    copy_to_py = open('run.py', 'w')
+    f = open("./leaf_examples/"+filename)
+    string = f.read()
+    copy_to_py.write(string)
+    copy_to_py.close()
+    os.system('python run.py')
