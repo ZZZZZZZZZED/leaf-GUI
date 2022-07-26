@@ -45,9 +45,9 @@ with open(f"{result_dir}/infrastructure.csv", 'w') as csvfile:
             csvfile.write(csv_content)
 ```
 
-The above code block shows the efforts made in the [original script](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/examples/smart_city_traffic/main.py#L66-L72) to visualize some power meters; however, this code is not reusable and complex. Moreover, even with continued use of this method, some LEAF simulator characteristics such as [sampling frequency](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/leaf/power.py#L182) and [delay](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/leaf/power.py#L200-L207) are difficult to solve while using above method.
+The above code block shows the efforts made in the [original script](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/examples/smart_city_traffic/main.py#L66-L72) to visualize some power meters; however, this code is not reusable and complex. Moreover, even with continued use of this method, some LEAF simulator characteristics such as [sampling frequency](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/leaf/power.py#L182) and [delay](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/leaf/power.py#L200-L207) are difficult to solve.
 
-So, a more convinent method would be:
+So, a more convinent method we suggest here would be:
 
 ```python
 ch.output_csv(PM=pm_cloud, rename='Cloud',type = 1)
