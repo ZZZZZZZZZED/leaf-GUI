@@ -25,14 +25,12 @@ def storeStrintoPy(string, filename):
     copy_to_py = open(filename, 'w')
     copy_to_py.write(string)
     copy_to_py.close()
-    os.system('python %s'%filename)
+    os.system('python %s' %filename)
 
 def run_example(filename):
-    print('into run')
     copy_to_py = open('run.py', 'w')
-    f = open("./leaf_examples/"+filename)
+    f = open("./leaf_examples/" + filename)
     string = f.read()
     copy_to_py.write(string)
     copy_to_py.close()
-    print('into run2')
     os.system('python run.py')
