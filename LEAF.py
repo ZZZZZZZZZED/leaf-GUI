@@ -9,7 +9,6 @@ from streamlit_ace import st_ace
 from decimal import Decimal
 
 
-
 st.set_page_config(
      page_title="LEAF - Simulator User Interface",
      page_icon=Image.open(ui.LOGO),
@@ -31,9 +30,12 @@ if 'loadinggif' not in st.session_state:
 
 tab1, tab2, tab3 = st.tabs(["⏱️ Try Examples","📈 Python Input" ,"📁 Import Results"])
 with tab2.container():
+     st.write('Before running your script, don\'t forget to clean up uploaded files and choose example to defaut.')
      Input = st_ace(language = 'python', theme='xcode', key="code input", auto_update=True, max_lines=20, font_size=22)
 
 with tab1.container():
+     st.write('You can try some LEAF examples here!')
+     st.write('If you want to type python codes in, please choose empty example and clean up updated files.')
      choosed_example = st.selectbox(
      'Choose a example to check the results.',
      ('-', 'LEAF - Single Node', 'LEAF - Application Placement'))
@@ -181,7 +183,6 @@ st.markdown('''
      <style>
      .st-cf{font-size: 20px;}
      .st-af{font-size: 20px;}
-
      #leaf > div > span{color: green; font-size: 80px;}
      .css-15tx938{font-size: 20px;}
      

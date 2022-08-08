@@ -8,7 +8,7 @@ import base64
 LOADING_GIF = 'static/loading.gif'
 LOGO = 'static/logo.png'
 
-
+#toggle loading animation
 def loading(path):
     if st.session_state.loading == False:
         st.session_state['loading'] = True
@@ -20,7 +20,7 @@ def loading(path):
     elif st.session_state.loading == True:
         st.session_state['loading'] = False
         st.session_state['loadinggif'].empty()
-        
+
 def storeStrintoPy(string, filename):
     copy_to_py = open(filename, 'w')
     copy_to_py.write(string)

@@ -11,16 +11,15 @@ FILE = 'run.py'
 STATIC = "./static/"
 
 
-
+#copy results into cache file
 def into_cache(UploadedFile):
     df = pd.read_csv(UploadedFile,index_col=0)
     temp = pd.read_csv(STATIC+'temp.csv',index_col=0)
     temp = pd.merge(temp,df,on='time',how='outer', sort=True) 
-    print(temp)
     temp.fillna(method='ffill',inplace=True,axis=0)
     temp.to_csv(CACHE+UploadedFile.name)
 
-
+#clean cache file before new simulation
 def clean_cache(path):
     if not os.path.exists(path):
         os.makedirs(path)
@@ -28,6 +27,7 @@ def clean_cache(path):
         shutil.rmtree(path)  
         os.mkdir(path)
 
+#check if inf and app exists to modify spaceholder
 def check_exists(inf,app):
     filelist = os.listdir(CACHE)
     if inf and app in filelist:
@@ -37,6 +37,7 @@ def check_exists(inf,app):
     else:
         return False
 
+#read first line to be a base of addrows
 def read_first_line(csv):
     df = pd.read_csv(CACHE + csv,nrows = 1,index_col=0)
     return df
@@ -45,6 +46,7 @@ def get_row_length(csv):
     df = pd.read_csv(CACHE + csv,index_col=0)
     return df.shape[0]
 
+#optimize performance
 def read_row_by_sequence(csv,nrows):
     df = pd.read_csv(CACHE + csv,nrows=nrows,index_col=0)
     return df
@@ -65,7 +67,7 @@ def merge_results():
             temp_app.fillna(method = 'ffill',inplace=True, axis = 0)
             temp_app.to_csv(CACHE + 'application.csv')
 
-
+#core function to make the base of lines then front-end can draw it.
 def output_csv(PM, rename, filter:Optional[str] = 'sum',type: Optional[int] = 1, delay: Optional[float] = 0):
     result_dir = f"results_cache/"
     sum_contect = "time,"+ rename +"\n"
