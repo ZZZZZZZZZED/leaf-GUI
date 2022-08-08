@@ -6,6 +6,6 @@ logfile.log
 *.sqlite
 *.pyc
 __pycache__
-
+results_cache
 
 
