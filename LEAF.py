@@ -1,5 +1,3 @@
-
-from turtle import goto
 import csv_handler as ch
 import streamlit as st
 import pandas as pd
