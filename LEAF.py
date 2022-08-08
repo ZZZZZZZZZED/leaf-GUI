@@ -31,17 +31,17 @@ st.title('LEAF')
 if 'loadinggif' not in st.session_state:
      st.session_state['loadinggif'] = st.empty()
 
-tab1, tab2, tab3 = st.tabs(["📈 Python Input", "⏱️ Try Examples","📁 Import Results"])
-with tab1.container():
-     Input = st_ace(language = 'python', theme='xcode',key="code input",auto_update=True,max_lines=20,font_size=22)
-     dir(Input)
+tab1, tab2, tab3 = st.tabs(["⏱️ Try Examples","📈 Python Input" ,"📁 Import Results"])
 with tab2.container():
+     Input = st_ace(language = 'python', theme='xcode', key="code input", auto_update=True, max_lines=20, font_size=22)
+
+with tab1.container():
      choosed_example = st.selectbox(
      'Choose a example to check the results.',
-     ('-','LEAF - Single Node', 'LEAF - Application Placement'))
+     ('-', 'LEAF - Single Node', 'LEAF - Application Placement'))
 
 with tab3.container():
-     uploaded_files = st.file_uploader("Choose csv files output from LEAF simulator.",help='Choose \'infrustructure.csv\' or \'infrustructure.csv\' and \'application.csv\'',on_change=ui.uploader_callback,accept_multiple_files=True)
+     uploaded_files = st.file_uploader("Choose csv files output from LEAF simulator.", help='Choose \'infrustructure.csv\' or \'infrustructure.csv\' and \'application.csv\'',accept_multiple_files=True)
 
 
 
@@ -52,7 +52,7 @@ infrastructure.empty()
 application.empty()
 
 
-col1, col2 ,col3= st.columns([1,2,3])
+col1, col2 , col3= st.columns([1, 2, 3])
 
 agree = col1.checkbox('Live Chart')
 if agree:
@@ -66,13 +66,13 @@ else:
      st.session_state['live'] = False
 
 def draw_condition():
-     if ch.check_exists(ch.INFRASTRUCTURE,ch.APPLICATION) == 2:
+     if ch.check_exists(ch.INFRASTRUCTURE, ch.APPLICATION) == 2:
                if st.session_state.live == False:
                     draw_inf_app()
                else:
                     draw_live_inf_app()
                st.success('Done!')
-     elif ch.check_exists(ch.INFRASTRUCTURE,ch.APPLICATION) == 1:
+     elif ch.check_exists(ch.INFRASTRUCTURE, ch.APPLICATION) == 1:
           if st.session_state.live == False:
                draw_inf()
           else:
@@ -84,33 +84,32 @@ def draw_condition():
           st.empty()
 
 def draw_inf():
-     inf_df = pd.read_csv(ch.CACHE+ch.INFRASTRUCTURE,index_col=0)
+     inf_df = pd.read_csv(ch.CACHE+ch.INFRASTRUCTURE, index_col=0)
      st.line_chart(data=inf_df)
-
 
 def draw_live_inf():
      inf_df = ch.read_first_line(ch.INFRASTRUCTURE)
-     inf_chart = st.line_chart(data=inf_df,width=500,height=500)
-     for i in range(1,ch.get_row_length(ch.INFRASTRUCTURE)):
-          inf_chart.add_rows(ch.read_row_by_sequence(ch.INFRASTRUCTURE,nrows=i))
+     inf_chart = st.line_chart(data=inf_df, width=500, height=500)
+     for i in range(1, ch.get_row_length(ch.INFRASTRUCTURE)):
+          inf_chart.add_rows(ch.read_row_by_sequence(ch.INFRASTRUCTURE, nrows=i))
           time.sleep(float(st.session_state.delay))
 
 def draw_inf_app():
-     inf_df = pd.read_csv(ch.CACHE+ch.INFRASTRUCTURE,index_col=0)
-     infrastructure.line_chart(data=inf_df,width=500,height=500)
-     app_df = pd.read_csv(ch.CACHE+ch.APPLICATION,index_col=0)
-     application.line_chart(data=app_df,width=500,height=500)
+     inf_df = pd.read_csv(ch.CACHE+ch.INFRASTRUCTURE, index_col=0)
+     infrastructure.line_chart(data=inf_df, width=500, height=500)
+     app_df = pd.read_csv(ch.CACHE+ch.APPLICATION, index_col=0)
+     application.line_chart(data=app_df, width=500, height=500)
 
 def draw_live_inf_app():
      inf_df = ch.read_first_line(ch.INFRASTRUCTURE)
-     inf_chart = infrastructure.line_chart(data=inf_df,width=500,height=500)
+     inf_chart = infrastructure.line_chart(data=inf_df, width=500, height=500)
      app_df = ch.read_first_line(ch.APPLICATION)
-     app_chart = application.line_chart(data=app_df,width=500,height=500)
-     for i in range(1,ch.get_row_length(ch.INFRASTRUCTURE)):
-          inf_chart.add_rows(ch.read_row_by_sequence(ch.INFRASTRUCTURE,nrows=i))
+     app_chart = application.line_chart(data=app_df, width=500, height=500)
+     for i in range(1, ch.get_row_length(ch.INFRASTRUCTURE)):
+          inf_chart.add_rows(ch.read_row_by_sequence(ch.INFRASTRUCTURE, nrows=i))
           time.sleep(float(st.session_state.delay)/2)
-     for i in range(1,ch.get_row_length(ch.APPLICATION)):
-          app_chart.add_rows(ch.read_row_by_sequence(ch.APPLICATION,nrows=i))
+     for i in range(1, ch.get_row_length(ch.APPLICATION)):
+          app_chart.add_rows(ch.read_row_by_sequence(ch.APPLICATION, nrows=i))
           time.sleep(float(st.session_state.delay)/2)
 
 if st.button('Run simulator'):
@@ -124,36 +123,36 @@ if st.button('Run simulator'):
                if st.session_state.live == False:
                     for uploaded_file in uploaded_files:
                          if uploaded_file.name == ch.INFRASTRUCTURE:
-                              inf_df = pd.read_csv(uploaded_file,index_col=0)
-                              infrastructure.line_chart(data=inf_df,width=500,height=500)
+                              inf_df = pd.read_csv(uploaded_file, index_col=0)
+                              infrastructure.line_chart(data=inf_df, width=500, height=500)
                          elif uploaded_file.name == ch.APPLICATION:
                               app_df = pd.read_csv(uploaded_file,index_col=0)
-                              application.line_chart(data=app_df,width=500,height=500)
+                              application.line_chart(data=app_df, width=500, height=500)
                else:
                     for uploaded_file in uploaded_files:
                          ch.into_cache(uploaded_file)
                     inf_df = ch.read_first_line(ch.INFRASTRUCTURE)
-                    inf_chart = infrastructure.line_chart(data=inf_df,width=500,height=500)
+                    inf_chart = infrastructure.line_chart(data=inf_df, width=500, height=500)
                     app_df = ch.read_first_line(ch.APPLICATION)
-                    app_chart = application.line_chart(data=app_df,width=500,height=500)
-                    for i in range(1,ch.get_row_length(ch.INFRASTRUCTURE)):
-                         inf_chart.add_rows(ch.read_row_by_sequence(ch.INFRASTRUCTURE,nrows=i))
+                    app_chart = application.line_chart(data=app_df, width=500, height=500)
+                    for i in range(1, ch.get_row_length(ch.INFRASTRUCTURE)):
+                         inf_chart.add_rows(ch.read_row_by_sequence(ch.INFRASTRUCTURE, nrows=i))
                          time.sleep(float(st.session_state.delay)/2)
-                    for i in range(1,ch.get_row_length(ch.APPLICATION)):
-                         app_chart.add_rows(ch.read_row_by_sequence(ch.APPLICATION,nrows=i))
+                    for i in range(1, ch.get_row_length(ch.APPLICATION)):
+                         app_chart.add_rows(ch.read_row_by_sequence(ch.APPLICATION, nrows=i))
                          time.sleep(float(st.session_state.delay)/2)
                st.success('Done!')
           elif len(uploaded_files) == 1:
                uploaded_file = uploaded_files[0]
                if st.session_state.live == False:
-                    inf_df = pd.read_csv(uploaded_file,index_col=0)
+                    inf_df = pd.read_csv(uploaded_file, index_col=0)
                     st.line_chart(data=inf_df)
                else:
                     ch.into_cache(uploaded_file)
                     inf_df = ch.read_first_line(ch.INFRASTRUCTURE)
-                    inf_chart = st.line_chart(data=inf_df,width=500,height=500)
-                    for i in range(1,ch.get_row_length(ch.INFRASTRUCTURE)):
-                         inf_chart.add_rows(ch.read_row_by_sequence(ch.INFRASTRUCTURE,nrows=i))
+                    inf_chart = st.line_chart(data=inf_df, width=500, height=500)
+                    for i in range(1, ch.get_row_length(ch.INFRASTRUCTURE)):
+                         inf_chart.add_rows(ch.read_row_by_sequence(ch.INFRASTRUCTURE, nrows=i))
                          time.sleep(float(st.session_state.delay))
                st.success('Done!')
           else:
@@ -172,15 +171,13 @@ if st.button('Run simulator'):
 
      elif len(Input) > 0:
           print('code')
-          ui.storeStrintoPy(string=Input,filename=ch.FILE)
+          ui.storeStrintoPy(string=Input, filename=ch.FILE)
           draw_condition()
      ui.loading('static/loading.gif')
 
-     #TODO
-     #st.progress
 
 
- 
+
 #css
 st.markdown('''
      <style>
