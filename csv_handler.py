@@ -78,7 +78,7 @@ def output_csv(PM, rename, filter:Optional[str] = 'sum',type: Optional[int] = 1,
     for i, powermeter in enumerate(PM.measurements):
         sum = powermeter.static + powermeter.dynamic
         j = i
-        j*=PM.measurement_interval
+        j *= PM.measurement_interval
         if filter == 'sum':
             sum_contect += f"{j + delay},{sum}\n"
         elif filter == 'dynamic':
@@ -98,6 +98,5 @@ def output_csv(PM, rename, filter:Optional[str] = 'sum',type: Optional[int] = 1,
             csvfile.write(full_content)
 
 def from_filechooser_to_cache(file):
-    print(file)
     shutil.move(file,CACHE+file)
 

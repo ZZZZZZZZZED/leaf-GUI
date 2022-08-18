@@ -185,5 +185,4 @@ st.markdown('''
      .st-af{font-size: 20px;}
      #leaf > div > span{color: green; font-size: 80px;}
      .css-15tx938{font-size: 20px;}
-     
      </style>''', unsafe_allow_html=True)
