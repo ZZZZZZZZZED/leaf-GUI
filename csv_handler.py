@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 import shutil
-from streamlit import uploaded_file_manager
 from typing import Optional
 
 CACHE = "./results_cache/"
