@@ -13,10 +13,10 @@ STATIC = "./static/"
 #copy results into cache file
 def into_cache(UploadedFile):
     df = pd.read_csv(UploadedFile,index_col=0)
-    temp = pd.read_csv(STATIC+'temp.csv',index_col=0)
-    temp = pd.merge(temp,df,on='time',how='outer', sort=True) 
-    temp.fillna(method='ffill',inplace=True,axis=0)
-    temp.to_csv(CACHE+UploadedFile.name)
+    temp = pd.read_csv(STATIC + 'temp.csv', index_col = 0)
+    temp = pd.merge(temp, df, on = 'time',how = 'outer', sort = True) 
+    temp.fillna(method = 'ffill', inplace=True ,axis=0)
+    temp.to_csv(CACHE + UploadedFile.name)
 
 #clean cache file before new simulation
 def clean_cache(path):
