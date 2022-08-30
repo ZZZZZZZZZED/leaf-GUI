@@ -27,7 +27,7 @@ st.title('LEAF')
 #describing
 st.write("This application is developed for the MSc Development Project for IT+ project at the University of Glasgow.")
 st.write("Try Examples, Python Input, and Import Results input methods are provided for you to use LEAF in different stages.") 
-st.markdown("**Try Examples**: Two examples provide here, both adopted by original LEAF examples.")
+st.write("**Try Examples**: Two examples provide here, both adopted by original LEAF examples.")
 st.write("**Python Input**:  This is the primary input method of this program; providing a Python compiler, users can imitate the case code to get the custom result.")
 st.write("**Import Results**: This option is mainly used to render complex simulations. Users need to use LEAF to get the results locally and import the result file into the system to get the corresponding graph.")
 
@@ -130,11 +130,9 @@ if st.button('Run simulator'):
                     for uploaded_file in uploaded_files:
                          print(uploaded_file.name)
                          if uploaded_file.name == ch.INFRASTRUCTURE:
-                              print("infname = "+uploaded_file.name)
                               inf_df = pd.read_csv(uploaded_file, index_col=0)
                               infrastructure.line_chart(data=inf_df, width=500, height=500)
                          elif uploaded_file.name == ch.APPLICATION or uploaded_file.name == 'applications.csv':
-                              print("appname = "+uploaded_file.name)
                               app_df = pd.read_csv(uploaded_file,index_col=0)
                               application.line_chart(data=app_df, width=500, height=500)
                else:
@@ -185,8 +183,6 @@ if st.button('Run simulator'):
      ui.loading('static/loading.gif')
 
 
-
-
 #css
 st.markdown('''
      <style>
@@ -199,4 +195,5 @@ st.markdown('''
      #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div > div:nth-child(1) > div > div:nth-child(4) > div > div > p{font-size: 20px;}
      #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div > div:nth-child(1) > div > div:nth-child(5) > div > div > p{font-size: 20px;}
      #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div > div:nth-child(1) > div > div:nth-child(6) > div > div > p{font-size: 20px;}
+     #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div > div:nth-child(1) > div > div:nth-child(7) > div > div > p{font-size: 20px;}
      </style>''', unsafe_allow_html=True)
