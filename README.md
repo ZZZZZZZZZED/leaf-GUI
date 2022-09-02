@@ -1,10 +1,18 @@
 # A LEAF User Interface with Streamlit
- 
-This project is based on practising the introductory examples in the [original LEAF example](https://github.com/dos-group/leaf/tree/main/examples) in the python version, users can directly watch the power usage in user-modified infrastructure and application chart. This application is conducted through [streamlit](https://streamlit.io/) for fast-built data representation. 
+
+This project is for COMPSCI5018P MSc Development Project for IT+ at the University of Glasgow. Given the limit of the development cycle and the unfamiliarity of the framework used by the developer, problems are found from the industrial application point of view.
+
+LEAF-UI is based on practising the introductory examples in the [original LEAF example](https://github.com/dos-group/leaf/tree/main/examples) in the python version, users can directly watch the power usage in user-modified infrastructure and application chart. This application is conducted through [streamlit](https://streamlit.io/) for fast-built data representation. 
 
 Some new methods were introduced in the leaf-GUI for agile and compatibility usage; as a result, users will no longer need to write [complex loops for writing to csv](https://github.com/dos-group/leaf/blob/b6a2c92cafa614f1f0adde4f5b581d9d0a461937/examples/smart_city_traffic/main.py#L56-L78), and [modify how each data](https://github.com/dos-group/leaf/tree/main/examples/smart_city_traffic/analysis) would be displayed in the final chart.
 
-## ⚙️ Get start!
+## 🌐 Rapid Deployment
+
+The permanent link of this application is [https://zzzzzzzzzed-leaf-gui-leaf-akha61.streamlitapp.com/](https://zzzzzzzzzed-leaf-gui-leaf-akha61.streamlitapp.com/).
+
+LEAF-UI is hosted on Streamlit Cloud, if you touch LEAF-UI through this link, please copy and paste the content in ```cloud_setter.py``` into the Python compiler on the cloud for the first time to prevent errors. The reasons have been discussed in detail in the project report.
+
+## ⚙️ Get started on your local machine!
 
 Set up your environment and run:
 ```python
@@ -70,7 +78,7 @@ ch.merge_results()
 
 Because of the existing defects of streamlit, if there is a cell with the value NAN in a column, the whole column will disappear on the graph. Therefore, this project fills NAH with valid upward values to compensate for the missing data caused by different sampling intervals. This may lead to a bias between the final result and the actual power usage in practical applications. However, according to the statistics principle: the larger the sample, the smaller the error. We can conclude that when the user reduces the sampling frequency, the user also tolerates and accepts data error since users decide the value of the interval. So there is not much of a real problem with our approach that needs to be discussed.
 
-For better conducting the living chart, it is best not to simulate more than 3600 seconds, which is a simulated hour, because a large amount of data flow may cause the page to get stuck, but after waiting for a period of calculation time, the final result will be displayed correctly. Suppose you must simulate the power consumption in an extensive time background, such as 3600*24, to find out the difference between day and night. In that case, you can get the CSV file through [original LEAF](https://github.com/dos-group/leaf) and import the CSV file on the home page by the ‘import results’ button, and the development will be displayed correctly.
+For better conducting the living chart, it is best not to simulate more than 3600 seconds, which is a simulated hour, because a large amount of data flow may cause the page to get stuck, but after waiting for a period of calculation time, the final result will be displayed correctly. Suppose you must simulate the power consumption in an extensive time background, such as 3600*24, to find out the difference between day and night. In that case, you can get the CSV file through [original LEAF](https://github.com/dos-group/leaf) and import the CSV file on the home page by the ‘Import Results’ button, and the development will be displayed correctly.
 
 ## ❓ More information
 
