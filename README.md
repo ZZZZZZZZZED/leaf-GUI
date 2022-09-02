@@ -10,7 +10,7 @@ Some new methods were introduced in the leaf-GUI for agile and compatibility usa
 
 The permanent link of this application is [https://zzzzzzzzzed-leaf-gui-leaf-akha61.streamlitapp.com/](https://zzzzzzzzzed-leaf-gui-leaf-akha61.streamlitapp.com/).
 
-LEAF-UI is hosted on Streamlit Cloud, if you touch LEAF-UI through this link, please copy and paste the content in ```cloud_setter.py``` into the Python compiler on the cloud for the first time to prevent errors. The reasons have been discussed in detail in the project report.
+LEAF-UI is hosted on Streamlit Cloud, if you touch LEAF-UI through this link, please copy the content in ```cloud_setter.py``` into the Python compiler on the cloud for the first time to prevent errors. The reasons have been discussed in detail in the project report.
 
 ## ⚙️ Get started on your local machine!
 
